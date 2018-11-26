@@ -1,29 +1,5 @@
-# sura-blog
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- ## 论坛系统的前端部分
+> 后端部分的骨架差不多搭出来了</br>
+> 差不多该开始前端部分的编码了</br>
+> readme依旧占坑
+## 以上，合掌
