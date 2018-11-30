@@ -1,8 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
+import 'element-ui/lib/theme-chalk/display.css'
+import 'element-ui/lib/theme-chalk/index.css'
+import {Button} from 'element-ui'
+
 
 Vue.config.productionTip = false
+
+Vue.use(Button)
 
 new Vue({
   render: h => h(App),
