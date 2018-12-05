@@ -1,0 +1,5 @@
+export const UPDATE_INDEX = 'update_index'
+export const INITIALIZATION_TIME = 'initialization_time'
+export const REQUESTING = 'requesting'
+export const UPDATE_PAGE = 'update_page'
+export const REQUEST_ERROR = 'request_error'

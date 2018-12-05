@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
+import store from './store/store'
 import 'element-ui/lib/theme-chalk/display.css'
 import 'element-ui/lib/theme-chalk/index.css'
-import {Button} from 'element-ui'
+import {Input, Button} from 'element-ui'
 
 
 Vue.config.productionTip = false
 
+Vue.use(Input)
 Vue.use(Button)
 
 new Vue({
   render: h => h(App),
-  router: router,
+  router,
+  store
 }).$mount('#app')
