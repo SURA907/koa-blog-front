@@ -4,6 +4,8 @@ import router from './router/index'
 import store from './store/store'
 import 'element-ui/lib/theme-chalk/display.css'
 import 'element-ui/lib/theme-chalk/index.css'
+import './../public/css/markdown.css'
+import './../public/css/clear_style.css'
 import {Input, Button} from 'element-ui'
 
 

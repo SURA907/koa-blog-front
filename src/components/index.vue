@@ -1,21 +1,20 @@
 <template>
   <div>
-    <Banner @scroll.passive.stop="stop_scroll"></Banner>
-    <router-view class="index-view"></router-view>
+    <Banner></Banner>
+    <keep-alive include="Home">
+      <router-view class="index-view"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import Banner from './../views/Banner'
-
-export default {
-  name: 'Index',
-  components: {
-    Banner
-  },
-  methods: {
+  import Banner from './../views/Banner'
+  export default {
+    name: 'Index',
+    components: {
+      Banner
+    }
   }
-}
 </script>
 
 <style scoped>
@@ -23,4 +22,3 @@ export default {
     padding: 4rem 0 2rem 0;
   }
 </style>
-

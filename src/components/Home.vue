@@ -2,7 +2,7 @@
   <div class="home-content">
     <div class="top-content">
       <div class="logo-content">
-        <img src="./../assets/carousel-item2.png" alt="">
+        <img src="./../assets/carousel-item2.jpg" alt="">
       </div>
 
       <div class="logo-side-content">
@@ -19,28 +19,39 @@
         <router-link
           class="article-title"
           :to="item.article_address">
-          {{item.article_title}}
+          {{item.title}}
         </router-link>
-        <div class="article-description">{{item.article_description}}</div>
+        <div class="article-description">{{item.description}}</div>
         <div class="article-information-content article-text">
-          <span class="author el-icon-edit">{{item.article_author}}</span>
-          <span class="release-time el-icon-date"> 张贴于{{item.article_release_time}}</span>
+          <span class="author el-icon-edit">{{item.user}}</span>
+          <span class="release-time el-icon-date"> 张贴于{{item.create_at}}</span>
         </div>
       </div>
     </div>
-    <div class="bottom-btn-content">
+    <div class="request-status">
+      <!-- 数据请求中 -->
+      <div v-if="this.loading === true">LOADING...</div>
+      <!-- 数据请求完成，无错误 -->
+      <div v-if="this.loading === false && this.err_message === null"" class="bottom-btn-content">
       <span v-if="full_load">没有更多了(T_T)</span>
       <el-button @click="load_article" v-else>点击加载更多</el-button>
+      </div>
+      <!-- 数据请求完成，有错误 -->
+      <div v-if="this.loading === false && this.err_message !== null">{{err_message}}，请稍后再试</div>
     </div>
   </div>
 </template>
 
 <script>
   import {mapState, mapActions} from 'vuex'
+  import Banner from './../views/Banner'
   export default {
     name: "Home",
+    components: {
+      Banner
+    },
     computed: {
-      ...mapState(['index_data', 'full_load'])
+      ...mapState(['index_data', 'loading','err_message','full_load'])
     },
     methods: {
       ...mapActions(['request_index', 'initialization_time']),
@@ -139,11 +150,12 @@
     height: 100px;
     margin: 0 0 1.4rem 0;
   }
-  .home-content .bottom-btn-content {
+  .home-content .request-status {
     width: 100%;
     text-align: center;
+    margin: 1rem 0;
   }
-  .home-content .bottom-btn-content button {
+  .home-content .request-status button {
     background-color: #D763AF;
     color: #F4F4F4;
     border-radius: 12px;

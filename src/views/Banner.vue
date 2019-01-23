@@ -8,9 +8,9 @@
       </button>
 
       <!-- 站点logo -->
-      <button class="btn-logo">
+      <router-link to="/home" class="btn-logo">
         <img src="./../assets/logo.png" class="logo" title="">
-      </button>
+      </router-link>
 
       <!-- 搜索框 pc窗口-->
       <el-input
@@ -18,7 +18,8 @@
         size="small"
         placeholder="搜索"
         prefix-icon="el-icon-search"
-        v-model="search_data">
+        v-model="search_data"
+        @keydown.enter.native="submit_search">
       </el-input>
       <!-- 搜索框 小屏设备 -->
       <div
@@ -33,14 +34,13 @@
           :class="{'search-input-xs-open': xs_search_input_show}"
           size="small"
           placeholder="搜索"
-          v-model="search_data">
+          v-model="search_data"
+          @keydown.enter.native="submit_search_xs">
         </el-input>
       </div>
 
       <!-- 用户状态 -->
-      <button class="user-status">
-        <span>登录</span>
-      </button>
+      <UserStatus class="user-status"/>
 
     </div>
 
@@ -56,9 +56,9 @@
             <img class="guide-ico" src="./../assets/guide-ico.png">
           </button>
 
-          <button class="btn-logo">
+          <router-link to="/home" class="btn-logo">
             <img src="./../assets/logo.png" class="logo" title="">
-          </button>
+          </router-link>
         </div>
 
         <router-link
@@ -100,8 +100,13 @@
 </template>
 
 <script>
+  import {Notification} from 'element-ui'
+  import UserStatus from './UserStatus'
   export default {
     name: "Banner",
+    components: {
+      UserStatus
+    },
     data() {
       return {
         guide_is_show: false,
@@ -110,6 +115,7 @@
       }
     },
     methods: {
+      // 控制侧边栏开合
       change_guide_status() {
         this.guide_is_show = !this.guide_is_show
         if (this.guide_is_show === true) {
@@ -119,8 +125,33 @@
         }
         return true
       },
+      // 控制搜索框是否隐藏
       change_xs_search_status() {
         this.xs_search_input_show = !this.xs_search_input_show
+      },
+      // 提交搜索
+      submit_search() {
+        let search_data = this.search_data.trim()
+        if (search_data === '') {
+          // 输入为空
+          Notification({
+            title: '警告',
+            message: '输入不能为空',
+            type: 'warning',
+            position: 'bottom-left'
+          })
+        } else {
+          Notification({
+            title: '成功',
+            message: '搜索功能施工中',
+            type: 'success',
+            position: 'bottom-left'
+          })
+        }
+      },
+      // 提交搜索-小屏设备
+      submit_search_xs() {
+        alert('功能施工中')
       }
     }
   }
@@ -178,6 +209,7 @@
     width: 30%;
     margin-left: 10%;
     margin-right: 20%;
+    user-select: text;
   }
   /* 搜索栏 手机端窗口 */
   .top-content .search-content-xs {
@@ -192,13 +224,14 @@
     top: 2rem;
     left: -59vw;
     transition: height 0.3s;
+    user-select: text;
   }
   .top-content .search-input-xs-open {
     height: 32px;
   }
-  /* 用户状态 */
   .top-content .user-status {
-    margin: 0 2rem 0 0;
+    height: 1.4rem;
+    line-height: 1.4rem;
   }
 
   /*侧边栏样式*/
@@ -222,6 +255,7 @@
     width: 15rem;
     height: 100vh;
     background-color: #f4f4f4;
+    border-right: 1px inset #bbffaa;
   }
   .banner-content .side-content .right-side-content {
     flex-grow: 1;
