@@ -11,12 +11,7 @@ import {
   UPDATE_ARTICLE_ERROR,
   INITIALIZATION_ARTICLE_STATUS,
   UPDATE_ARTICLE_STATUS,
-  SEND_MAIL_SIGN_UP_ERROR,
-  SEND_MAIL_SIGN_UP_SUCCESS,
-  USER_SIGN_UP_ERROR,
-  USER_SIGN_UP_SUCCESS
 } from './types'
-import {MessageBox} from 'element-ui'
 
 const mutations = {
   /* 首页相关 */
@@ -66,39 +61,6 @@ const mutations = {
     state.articles.error_message = null
     state.articles.article_status = null
     state.articles.article_data = null
-  },
-
-  /*用户注册相关*/
-  // 用户注册邮件发送失败
-  [SEND_MAIL_SIGN_UP_ERROR] (state, {error_message}) {
-    MessageBox.alert(error_message, '错误', {
-      type: 'error',
-      confirmButtonText: '确定',
-    })
-  },
-  // 用户注册邮件成功发送
-  [SEND_MAIL_SIGN_UP_SUCCESS] () {
-    MessageBox.alert(`注册邮件发送成功；不出意外的话，SURA发送的邮件会出现在 '垃圾箱'中，请注意查收::>_<::`, '成功', {
-      type: 'success',
-      confirmButtonText: '确定',
-    })
-  },
-  // 注册成功
-  [USER_SIGN_UP_SUCCESS] () {
-    MessageBox.alert('注册成功', '成功', {
-      type: 'success',
-      confirmButtonText: '确定',
-      callback: () => {
-        history.back()
-      }
-    })
-  },
-  // 注册失败
-  [USER_SIGN_UP_ERROR] (state, {error_message}) {
-    MessageBox.alert(error_message, '失败', {
-      type: 'error',
-      confirmButtonText: '确定',
-    })
   },
 }
 

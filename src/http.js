@@ -1,10 +1,12 @@
 import axios from 'axios'
-import {} from './types'
-import state from './state'
+import state from './store/state'
 import {MessageBox} from "element-ui";
+import API from './store/api'
 
 /* axios 默认超时设置 */
 axios.defaults.timeout = 5000
+/* axios 默认域名地址 */
+axios.defaults.baseURL = API.BASE_URL
 
 /* http request 拦截器 */
 axios.interceptors.request.use(

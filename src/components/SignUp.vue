@@ -76,7 +76,7 @@
       <el-button
         class="btn-submit"
         @click="submit"
-        :disabled="!password_allowed || !password_same || input_data_verification_code === ''"
+        :disabled="!password_allowed || !password_same || input_data_verification_code.trim() === '' || input_data_username.trim() === ''"
         >提交</el-button>
 
     </div>
@@ -85,7 +85,8 @@
 
 <script>
   import {MessageBox} from 'element-ui'
-  import {mapActions} from 'vuex'
+  import axios from './../http'
+  import API from './../store/api'
   export default {
     name: "SignUp",
     data() {
@@ -105,11 +106,11 @@
     computed: {
       // 密码长度是否大于六位
       password_allowed() {
-        return this.input_data_password.length >= 6
+        return this.input_data_password.trim().length >= 6
       },
       // 两次输入的密码是否一致
       password_same() {
-        return this.input_data_password === this.input_data_password_again && this.input_data_password.length >= 6
+        return this.input_data_password.trim() === this.input_data_password_again.trim() && this.input_data_password.trim().length >= 6
       },
       // 邮件格式
       mail_allowed() {
@@ -118,66 +119,93 @@
       }
     },
     methods: {
-      ...mapActions(['send_mail_sign_up', 'user_sign_up']),
-      // input password 获取焦点
+      /* input password 获取焦点 */
       onActiveInputPassword() {
         this.active_input_password = true
       },
-      // input password-again 获取焦点
+      /* input password-again 获取焦点 */
       onActiveInputPasswordAgain() {
         this.active_input_password_again = true
       },
-      // input mail 获取焦点
+      /* input mail 获取焦点 */
       onActiveInputMail() {
         this.active_input_mail = true
       },
+      /* 返回上一个页面 */
       back() {
         window.history.back()
       },
-      sendMail() {
-        let mail_reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
-        let mail = this.input_data_mail.trim().toLowerCase()
-        if (mail_reg.test(mail) !== true ) {
-          // 邮件格式不正确
-          MessageBox.alert('邮件格式不正确', '警告', {
-            type: 'warning',
+      /* messageBox封装 */
+      myMessageBox(title, message, type, callback=null) {
+        if (typeof callback === 'function') {
+          MessageBox.alert(message, title, {
+            type: type,
+            confirmButtonText: '确定',
+            callback: callback
+          })
+        } else {
+          MessageBox.alert(message, title, {
+            type: type,
             confirmButtonText: '确定'
           })
-        } else {
-          this.interval = 60
-          let timer = setInterval(() => {
-            if (this.interval !== 0) {
-              this.interval--
-            } else {
-              this.interval = null
-              this.send_mail_status = null
-              clearInterval(timer)
-            }
-          }, 1000)
-          this.send_mail_status = 'sending'
-          this.send_mail_sign_up(mail)
         }
       },
+      /* 发送验证码 */
+      sendMail() {
+        let url = API.MAIL_SIGN_UP
+        let mail = this.input_data_mail.trim().toLowerCase()
+        this.interval = 60
+        let timer = setInterval(() => {
+          if (this.interval !== 0) {
+            this.interval--
+          } else {
+            this.interval = null
+            this.send_mail_status = null
+            clearInterval(timer)
+          }
+        }, 1000)
+        this.send_mail_status = 'sending'
+        // 发送邮件
+        axios.post(url, {
+          mail: mail
+        }).then(res => {
+          let result = res.data
+          if (result.code === 0) {
+            // 邮件发送成功
+            this.myMessageBox('成功', `邮件发送成功，SURA发送的邮件十有八九会出现在'垃圾箱'中，请注意查收::>_<::`, 'success')
+          } else {
+            // 邮件发送失败
+            this.interval = null
+            this.send_mail_status = null
+            clearInterval(timer)
+            this.myMessageBox('失败', result.message, 'error')
+          }
+        })
+      },
+      /* 用户注册 */
       submit() {
-        let mail_reg = /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/
+        let url = API.USER_SIGN_UP
         let username = this.input_data_username.trim()
         let password = this.input_data_password.trim()
-        let mail = this.input_data_mail.trim()
+        let mail = this.input_data_mail.trim().toLowerCase()
         let verification_code = this.input_data_verification_code.trim()
-        if (username === '' || verification_code === '' || password.length < 6 || mail_reg.test(mail) !== true) {
-          MessageBox.alert('参数不合法', '警告', {
-            type: 'warning',
-            confirmButtonText: '确定',
-          })
-        } else {
-          let data = {
-            username,
-            password,
-            verification_code,
-            mail,
+        axios.post(url, {
+          username,
+          password,
+          mail,
+          verification_code
+        }).then(res => {
+          let result = res.data
+          if (result.code === 0) {
+            // 注册成功
+            this.myMessageBox('成功', '注册成功', 'success', () => {
+              this.back()
+            })
+          } else {
+            // 注册失败
+            this.myMessageBox('失败', result.message, 'error')
           }
-          this.user_sign_up(data)
-        }
+        })
       },
     }
   }

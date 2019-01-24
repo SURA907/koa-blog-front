@@ -1,7 +1,7 @@
 /**
  * vuex 的actions模块
  * */
-import axios from './http'
+import axios from './../http'
 import moment from 'moment'
 import marked from 'marked'
 import API from './api'
@@ -9,15 +9,9 @@ import {
   UPDATE_INDEX,
   REQUESTING,
   INITIALIZATION_TIME,
-  REQUEST_ERROR,
   UPDATE_ARTICLE,
-  UPDATE_ARTICLE_ERROR,
   INITIALIZATION_ARTICLE_STATUS,
   UPDATE_ARTICLE_STATUS,
-  SEND_MAIL_SIGN_UP_ERROR,
-  SEND_MAIL_SIGN_UP_SUCCESS,
-  USER_SIGN_UP_ERROR,
-  USER_SIGN_UP_SUCCESS,
 } from './types'
 
 const actions = {
@@ -74,46 +68,6 @@ const actions = {
       }
       // 数据准备完成，触发mutation
       commit(UPDATE_ARTICLE, {data})
-    })
-  },
-
-  // 发送注册验证码邮件
-  send_mail_sign_up({commit}, mail) {
-    let url = API.MAIL_SIGN_UP
-    axios.post(url, {
-      mail: mail
-    })
-    .then(res => {
-      let data = res.data
-      if (data.code === 0) {
-        // 邮件发送成功
-        commit(SEND_MAIL_SIGN_UP_SUCCESS)
-      } else {
-        // 邮件发送失败
-        // console.log(data.message)
-        commit(SEND_MAIL_SIGN_UP_ERROR, {error_message: data.message})
-      }
-    })
-  },
-
-  // 用户注册
-  user_sign_up({commit}, data) {
-    let url = API.USER_SIGN_UP
-
-    axios.post(url, {
-      username: data.username,
-      password: data.password,
-      mail: data.mail,
-      verification_code: data.verification_code
-    }).then(res => {
-      let result = res.data
-      if (result.code === 0) {
-        // 注册成功
-        commit(USER_SIGN_UP_SUCCESS)
-      } else {
-        // 注册失败
-        commit(USER_SIGN_UP_ERROR, {error_message: result.message})
-      }
     })
   },
 }
