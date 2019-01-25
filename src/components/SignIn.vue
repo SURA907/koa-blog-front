@@ -23,13 +23,17 @@
     </div>
     <div class="btn-content">
       <span>不想登录了？<a @click="back" class="btn-back">返回</a></span>
-      <el-button class="btn-submit" @click="submit">提交</el-button>
+      <el-button
+        :disabled="input_data_username.trim() === '' || input_data_password.trim().length < 6"
+        class="btn-submit"
+        @keydown.enter="submit"
+        @click="submit">提交</el-button>
     </div>
   </div>
 </template>
 
 <script>
-  import {Notification} from 'element-ui'
+  import {mapActions} from 'vuex'
   export default {
     name: "SignIn",
     data() {
@@ -39,30 +43,18 @@
       }
     },
     methods: {
+      ...mapActions(['user_sign_in']),
       back() {
         window.history.back()
       },
       submit() {
-        let username = this.input_data_username || ''
-        let password = this.input_data_password || ''
-        if (username.trim() === '' || password.trim() === '') {
-          Notification({
-            title: '警告',
-            message: '用户名或密码不能为空',
-            type: 'warning',
-            position: 'bottom-left'
-          })
-        } else {
-          username = username.trim()
-          password = password.trim()
-          Notification({
-            title: '成功',
-            message: '施工中',
-            type: 'success',
-            position: 'bottom-left'
-          })
-        }
-      }
+        let username = this.input_data_username.trim()
+        let password = this.input_data_password.trim()
+        this.user_sign_in({
+          username,
+          password
+        })
+      },
     }
   }
 </script>

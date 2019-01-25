@@ -11,6 +11,9 @@ import {
   UPDATE_ARTICLE_ERROR,
   INITIALIZATION_ARTICLE_STATUS,
   UPDATE_ARTICLE_STATUS,
+  USER_SIGN_IN_SUCCESS,
+  GET_USER_PUBLIC_SUCCESS,
+  SIGN_OUT
 } from './types'
 
 const mutations = {
@@ -61,6 +64,25 @@ const mutations = {
     state.articles.error_message = null
     state.articles.article_status = null
     state.articles.article_data = null
+  },
+
+  /* 用户登录相关 */
+  // 登录成功
+  [USER_SIGN_IN_SUCCESS] (state, {token}) {
+    state.user_status.sign_in_status = 'sign_in'
+    state.user_status.token = token
+  },
+  // 获取当前用户公开信息成功
+  [GET_USER_PUBLIC_SUCCESS] (state, {username, avatar}) {
+    state.user_status.username = username
+    state.user_status.avatar = avatar
+    state.user_status.sign_in_status = 'sign_in'
+  },
+  // 用户登出
+  [SIGN_OUT] (state) {
+    state.user_status.username = null
+    state.user_status.avatar = null
+    state.user_status.sign_in_status = 'sign_out'
   },
 }
 

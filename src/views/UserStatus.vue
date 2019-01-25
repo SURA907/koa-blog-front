@@ -10,19 +10,24 @@
       </router-link>
     </span>
     <span class="user-message" v-else>
-      <img class="user-avatar-default" src="./../assets/user-avatar.png" alt="">
       <span>hi,&nbsp;</span>
-      <span class="username">SURA</span>
+      <span class="username">{{user_status.username}}</span>
     </span>
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
   export default {
     name: "UserStatus",
     computed: {
       ...mapState(['user_status'])
+    },
+    methods: {
+      ...mapActions(['get_user_public'])
+    },
+    mounted() {
+      this.get_user_public()
     }
   }
 </script>

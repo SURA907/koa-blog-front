@@ -32,7 +32,7 @@
       <!-- 数据请求中 -->
       <div v-if="this.loading === true">LOADING...</div>
       <!-- 数据请求完成，无错误 -->
-      <div v-if="this.loading === false && this.err_message === null"" class="bottom-btn-content">
+      <div v-if="this.loading === false && this.err_message === null" class="bottom-btn-content">
       <span v-if="full_load">没有更多了(T_T)</span>
       <el-button @click="load_article" v-else>点击加载更多</el-button>
       </div>
@@ -44,17 +44,14 @@
 
 <script>
   import {mapState, mapActions} from 'vuex'
-  import Banner from './../views/Banner'
   export default {
     name: "Home",
-    components: {
-      Banner
-    },
+    components: {},
     computed: {
       ...mapState(['index_data', 'loading','err_message','full_load'])
     },
     methods: {
-      ...mapActions(['request_index', 'initialization_time']),
+      ...mapActions(['request_index', 'initialization_time', 'initialization_user_statue']),
       load_article() {
         this.request_index()
       }
@@ -63,6 +60,7 @@
       // 初始化时间戳
       this.initialization_time()
       this.request_index()
+      this.initialization_user_statue()
     }
   }
 </script>

@@ -189,6 +189,7 @@
         let password = this.input_data_password.trim()
         let mail = this.input_data_mail.trim().toLowerCase()
         let verification_code = this.input_data_verification_code.trim()
+        // 发送注册请求
         axios.post(url, {
           username,
           password,

@@ -6,7 +6,9 @@ const api = {
   INDEX: '/articles',
   ARTICLE: '/articles/',
   MAIL_SIGN_UP: '/mail/signup',
-  USER_SIGN_UP: '/users'
+  USER_SIGN_UP: '/users',
+  USER_SIGN_IN: '/users/signin',
+  USER_PUBLIC: '/users/public',
 }
 
 export default api
