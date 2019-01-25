@@ -112,7 +112,8 @@ const actions = {
         // 获取信息成功
         commit(GET_USER_PUBLIC_SUCCESS, {
           username: result.data.username,
-          avatar: result.data.avatar
+          avatar: result.data.avatar,
+          type: result.data.type
         })
       } else {
         // 获取信息失败 - token失效
@@ -121,6 +122,11 @@ const actions = {
       }
     })
   },
+  // 用户登出
+  user_sign_out({commit}) {
+    localStorage.removeItem('token')
+    commit(SIGN_OUT)
+  }
 }
 
 export default actions

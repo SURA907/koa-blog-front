@@ -73,15 +73,17 @@ const mutations = {
     state.user_status.token = token
   },
   // 获取当前用户公开信息成功
-  [GET_USER_PUBLIC_SUCCESS] (state, {username, avatar}) {
+  [GET_USER_PUBLIC_SUCCESS] (state, {username, avatar, type}) {
     state.user_status.username = username
     state.user_status.avatar = avatar
     state.user_status.sign_in_status = 'sign_in'
+    state.user_status.type = type
   },
   // 用户登出
   [SIGN_OUT] (state) {
     state.user_status.username = null
     state.user_status.avatar = null
+    state.user_status.type = null
     state.user_status.sign_in_status = 'sign_out'
   },
 }

@@ -24,7 +24,9 @@ const state = {
     // 用户名
     username: null,
     // 头像
-    avatar: null
+    avatar: null,
+    // 用户类型
+    type: null
   },
 }
 
