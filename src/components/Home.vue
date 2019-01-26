@@ -51,7 +51,7 @@
       ...mapState(['index_data', 'loading','err_message','full_load'])
     },
     methods: {
-      ...mapActions(['request_index', 'initialization_time', 'initialization_user_statue']),
+      ...mapActions(['request_index', 'initialization_time']),
       load_article() {
         this.request_index()
       }
@@ -60,7 +60,6 @@
       // 初始化时间戳
       this.initialization_time()
       this.request_index()
-      this.initialization_user_statue()
     }
   }
 </script>

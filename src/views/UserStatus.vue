@@ -41,7 +41,7 @@
       ...mapState(['user_status'])
     },
     methods: {
-      ...mapActions(['get_user_public', 'user_sign_out']),
+      ...mapActions(['get_user_public', 'user_sign_out', 'initialization_user_statue']),
       user_status_over() {
         this.user_status_hover = true
       },
@@ -54,6 +54,7 @@
       }
     },
     mounted() {
+      this.initialization_user_statue()
       this.get_user_public()
     }
   }
