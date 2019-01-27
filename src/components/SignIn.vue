@@ -18,6 +18,7 @@
         v-model="input_data_password"
         placeholder="密码"
         size="small"
+        @keydown.enter.native="submit"
         prefix-icon="el-icon-edit"/>
 
     </div>
@@ -26,13 +27,13 @@
       <el-button
         :disabled="input_data_username.trim() === '' || input_data_password.trim().length < 6"
         class="btn-submit"
-        @keydown.enter="submit"
         @click="submit">提交</el-button>
     </div>
   </div>
 </template>
 
 <script>
+  import {MessageBox} from 'element-ui'
   import {mapActions} from 'vuex'
   export default {
     name: "SignIn",
@@ -50,10 +51,17 @@
       submit() {
         let username = this.input_data_username.trim()
         let password = this.input_data_password.trim()
-        this.user_sign_in({
-          username,
-          password
-        })
+        if (username.length === 0 || password.length < 6) {
+          MessageBox.alert('用户名为空或密码长度少于6位', '警告', {
+            type: 'warning',
+            confirmButtonText: '确定'
+          })
+        } else {
+          this.user_sign_in({
+            username,
+            password
+          })
+        }
       },
     }
   }

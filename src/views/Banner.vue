@@ -196,12 +196,12 @@
   }
   /* 顶部logo */
   .top-content .btn-logo {
-    margin-left: 2%;
+    margin-left: 1%;
   }
   .top-content .btn-logo .logo {
     vertical-align: top;
     display: inline-block;
-    height: 1.2rem;
+    height: 1.8rem;
   }
   /* 搜索栏 pc正常窗口 */
   .top-content .search-input {
@@ -276,7 +276,7 @@
   .banner-content .side-content .left-side-content .top-guide .logo {
     vertical-align: top;
     display: inline-block;
-    height: 1.2rem;
+    height: 1.8rem;
   }
   .banner-content .side-content .left-side-content .top-guide button {
     padding: 0;
@@ -289,7 +289,7 @@
     margin-left: 2vw;
   }
   .banner-content .side-content .left-side-content .top-guide .btn-logo {
-    margin-left: 2vw;
+    margin-left: 1vw;
   }
   .banner-content .side-content .left-side-content a {
     text-decoration: none;

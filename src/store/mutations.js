@@ -84,6 +84,7 @@ const mutations = {
     state.user_status.username = null
     state.user_status.avatar = null
     state.user_status.type = null
+    state.user_status.token = null
     state.user_status.sign_in_status = 'sign_out'
   },
 }

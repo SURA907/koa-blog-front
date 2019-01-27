@@ -76,7 +76,7 @@
       <el-button
         class="btn-submit"
         @click="submit"
-        :disabled="!password_allowed || !password_same || input_data_verification_code.trim() === '' || input_data_username.trim() === ''"
+        :disabled="!password_allowed || !password_same || input_data_verification_code.length !== 6 || input_data_username.trim() === ''"
         >提交</el-button>
 
     </div>

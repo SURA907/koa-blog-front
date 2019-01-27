@@ -5,8 +5,8 @@
 
         <h1 class="article-title">{{articles.article_data.title}}</h1>
         <div class="article-message">
-          <span class="author el-icon-edit">{{articles.article_data.user}}</span>
-          <span class="release-time el-icon-date">{{articles.article_data.create_at}}</span>
+          <span class="author el-icon-edit">&nbsp;{{articles.article_data.user}}</span>
+          <span class="release-time el-icon-date">&nbsp;{{articles.article_data.create_at}}</span>
         </div>
 
         <div

@@ -5,6 +5,7 @@ import Article from './../components/Article'
 import Home from './../components/Home'
 import SignIn from '../components/SignIn'
 import SignUp from '../components/SignUp'
+import AdminArticles from '../components/AdminArticles'
 
 Vue.use(Router)
 
@@ -24,9 +25,13 @@ export default new Router({
           component: Home
         },
         {
+          path: '/articles/users/admin',
+          component: AdminArticles
+        },
+        {
           path: '/articles/:article_id',
           component: Article
-        }
+        },
       ]
     },
     {

@@ -9,21 +9,26 @@
         <span>注册</span>
       </router-link>
     </span>
-    <span class="user-message" v-else>
-      <span
-        class="username"
-        @mouseover="user_status_over"
-        @mouseleave="user_status_leave">hi,&nbsp;{{user_status.username}}</span>
+    <span
+      @mouseover="user_status_over"
+      @mouseleave="user_status_leave"
+      class="user-message" v-else>
+      <span class="username">hi,&nbsp;{{user_status.username}}</span>
+      <i class="el-icon-caret-bottom"></i>
     </span>
     <span
       class="user-setting-content-default"
       :class="{'user-setting-content-show': user_status_hover}"
       @mouseover="user_status_over"
       @mouseleave="user_status_leave">
-        <span class="user-type">用户类型：{{user_status.type}}</span>
-        <el-button
-          class="btn-sign-out"
-          @click="sign_out">登出</el-button>
+      <span class="user-type">用户类型：{{user_status.type}}</span>
+
+      <el-button
+        class="user-setting-btn"
+        @click="to_create_article">文章</el-button>
+      <el-button
+        class="btn-sign-out user-setting-btn"
+        @click="sign_out">登出</el-button>
     </span>
   </div>
 </template>
@@ -51,6 +56,20 @@
       sign_out() {
         this.user_status_hover = false
         this.user_sign_out()
+
+        let route = this.$route.path
+        let route_reg = /(^\/home$|^\/articles\/[^/]+$)/
+        if (route_reg.test(route) !== true) {
+          this.$router.push({
+            path: '/home'
+          })
+        }
+      },
+      to_create_article() {
+        this.user_status_hover = false
+        this.$router.push({
+          path: '/articles/users/admin'
+        })
       }
     },
     mounted() {
@@ -73,13 +92,11 @@
     .user-message {
       color: #777777;
       font-size: 1rem;
+      cursor: pointer;
 
       span {
         height: 1.4rem;
         line-height: 1.4rem;
-      }
-      .username {
-        cursor: pointer;
       }
     }
 
@@ -95,7 +112,7 @@
       padding: 12px 0;
       transition: width,height 0.5s;
 
-      .btn-sign-out {
+      .user-setting-btn {
         margin-top: 12px;
         padding: 4px 12px;
         background-color: rgba(0, 0, 0, 0.06);

@@ -5,7 +5,7 @@ import axios from './../http'
 import moment from 'moment'
 import marked from 'marked'
 import API from './api'
-import {MessageBox} from 'element-ui'
+import {MessageBox, Notification} from 'element-ui'
 import {
   UPDATE_INDEX,
   REQUESTING,
@@ -93,6 +93,12 @@ const actions = {
         // 登录成功
         localStorage.setItem('token', result.token)
         commit(USER_SIGN_IN_SUCCESS, {token: result.token})
+        Notification({
+          title: '成功',
+          message: '登陆成功',
+          type: 'success',
+          position: 'bottom-left'
+        })
         window.history.back()
       } else {
         // 登陆失败
@@ -126,6 +132,12 @@ const actions = {
   user_sign_out({commit}) {
     localStorage.removeItem('token')
     commit(SIGN_OUT)
+    Notification({
+      title: '成功',
+      message: '登出成功',
+      type: 'success',
+      position: 'bottom-left'
+    })
   }
 }
 
