@@ -6,13 +6,14 @@ import 'element-ui/lib/theme-chalk/display.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import './../public/css/markdown.css'
 import './../public/css/clear_style.css'
-import {Input, Button} from 'element-ui'
+import {Input, Button, Tooltip} from 'element-ui'
 
 
 Vue.config.productionTip = false
 
 Vue.use(Input)
 Vue.use(Button)
+Vue.use(Tooltip)
 
 new Vue({
   render: h => h(App),

@@ -12,6 +12,7 @@
         v-model="input_data_username"
         placeholder="用户名"
         size="small"
+        autofocus="autofocus"
         prefix-icon="el-icon-view"/>
 
       <el-input

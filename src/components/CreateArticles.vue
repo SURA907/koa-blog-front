@@ -13,6 +13,17 @@
         placeholder="请输入描述"
         v-model="input_description">
       <hr>
+      <div class="operating-article">
+        <el-tooltip effect="dark" content="返回" placement="top">
+          <span
+            class="operating-btn el-icon-back"
+            @click="back"></span>
+        </el-tooltip>
+        <el-tooltip effect="dark" content="保存" placement="top">
+          <span
+            class="operating-btn el-icon-upload"></span>
+        </el-tooltip>
+      </div>
       <textarea
         class="input-content input-item"
         placeholder="请输入文章主体(markdown)"
@@ -53,7 +64,12 @@
           }
         })
       }
-    }
+    },
+    methods: {
+      back() {
+        window.history.back()
+      }
+    },
   }
 </script>
 
@@ -84,10 +100,27 @@
       }
       .input-content {
         padding: 6px;
-        height: 70vh;
+        height: 65vh;
         font-size: 18px;
         line-height: 1.4rem;
         background-color: #ffffff;
+      }
+      .operating-article {
+        height: 2rem;
+        background-color: #D9D9D9;
+
+        .operating-btn {
+          width: 2rem;
+          height: 2rem;
+          line-height: 2rem;
+          /*margin-right: 1rem;*/
+          text-align: center;
+          cursor: pointer;
+        }
+        .operating-btn:hover {
+          background-color: #595959;
+          color: #D9D9D9;
+        }
       }
     }
     .show {

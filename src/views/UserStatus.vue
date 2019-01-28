@@ -58,7 +58,7 @@
         this.user_sign_out()
 
         let route = this.$route.path
-        let route_reg = /(^\/home$|^\/articles\/[^/]+$)/
+        let route_reg = /(^\/home$|^\/articles\/[^/]{24}$)/
         if (route_reg.test(route) !== true) {
           this.$router.push({
             path: '/home'

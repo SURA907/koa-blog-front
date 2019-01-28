@@ -9,6 +9,7 @@ const api = {
   USER_SIGN_UP: '/users',
   USER_SIGN_IN: '/users/signin',
   USER_PUBLIC: '/users/public',
+  GET_ARTICLE_OWN: '/articles/users/own'
 }
 
 export default api

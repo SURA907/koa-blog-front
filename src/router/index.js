@@ -6,6 +6,7 @@ import Home from './../components/Home'
 import SignIn from '../components/SignIn'
 import SignUp from '../components/SignUp'
 import AdminArticles from '../components/AdminArticles'
+import CreateArticles from '../components/CreateArticles'
 
 Vue.use(Router)
 
@@ -23,6 +24,10 @@ export default new Router({
         {
           path: '/home',
           component: Home
+        },
+        {
+          path: '/articles/new',
+          component: CreateArticles
         },
         {
           path: '/articles/users/admin',
