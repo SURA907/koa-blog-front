@@ -7,6 +7,7 @@ import SignIn from '../components/SignIn'
 import SignUp from '../components/SignUp'
 import AdminArticles from '../components/AdminArticles'
 import CreateArticles from '../components/CreateArticles'
+import EditArticles from '../components/EditArticles'
 
 Vue.use(Router)
 
@@ -37,6 +38,10 @@ export default new Router({
           path: '/articles/:article_id',
           component: Article
         },
+        {
+          path: '/articles/edit/:id',
+          component: EditArticles
+        }
       ]
     },
     {

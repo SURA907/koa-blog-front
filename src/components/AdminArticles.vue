@@ -21,7 +21,9 @@
             <span class="author el-icon-edit-outline">&nbsp;{{item.user}}</span>
             <span class="create_at el-icon-date">&nbsp;张贴于{{item.create_at}}</span>
           </div>
-          <el-button class="el-icon-edit">&nbsp;编辑</el-button>
+          <el-button
+            class="el-icon-edit"
+            @click="edit_article(item._id)">&nbsp;编辑</el-button>
           <el-button
             class="el-icon-delete"
             @click="delete_article(item._id, item.title, index)">&nbsp;删除</el-button>
@@ -36,7 +38,7 @@
   import {mapState} from 'vuex'
   import {MessageBox, Notification} from 'element-ui'
   import axios from '../http'
-  import API from '../store/api'
+  import API from '../api'
   import moment from 'moment'
   export default {
     name: "AdminArticles",
@@ -90,6 +92,9 @@
             })
           }
         })
+      },
+      edit_article(id) {
+        this.$router.push('/articles/edit/'+id)
       },
       delete_article(id, title, index) {
         MessageBox.confirm(`确认删除文章'${title}'?`, '确认删除？', {

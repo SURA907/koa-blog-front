@@ -1,9 +1,7 @@
 <template>
   <div>
     <Banner></Banner>
-    <keep-alive include="Home">
-      <router-view class="index-view"></router-view>
-    </keep-alive>
+    <router-view class="index-view"></router-view>
   </div>
 </template>
 

@@ -42,7 +42,7 @@
   import API from '../api'
   import axios from '../http'
   export default {
-    name: "CreateArticles",
+    name: "EditArticles",
     data() {
       return {
         input_title: '',
@@ -59,35 +59,72 @@
     },
     mounted() {
       if (this.user_status.sign_in_status !== 'sign_in') {
-        MessageBox.alert('登录之后才可以创建文章', '警告', {
+        MessageBox.alert('登录之后才可以编辑文章', '警告', {
           type: 'warning',
           confirmButtonText: '确定',
           callback: () => {
             window.history.back()
           }
         })
+      } else {
+        this.get_article()
       }
     },
     methods: {
       back() {
         window.history.back()
       },
+      get_article() {
+        let id = this.$route.params['id'].trim()
+        let url = API.ARTICLE+id
+        axios.get(url).then(res => {
+          let result = res.data
+          if (result.code === 0) {
+            // 文章请求成功
+            // 检测文章是否是当前用户发布的
+            let data = result.data
+            if (data.user_id !== this.user_status.id) {
+              // 此文章并非房前用户发布的
+              MessageBox.alert('您不是文章的发布者', '警告', {
+                type: 'warning',
+                confirmButtonText: '确定'
+              }).then(() => {
+                window.history.back()
+              })
+            } else {
+              // 此文章由当前用户发布
+              this.input_title = data.title
+              this.input_description = data.description
+              this.input_content = decodeURIComponent(data.content)
+            }
+          } else {
+            // 文章请求失败
+            MessageBox.alert('文章不存在或已被删除', '错误', {
+              type: 'error',
+              confirmButtonText: '确定'
+            }).then(() => {
+              window.history.back()
+            })
+          }
+        })
+      },
       submit() {
+        let id = this.$route.params['id'].trim()
         let title = this.input_title.trim()
         let description = this.input_description.trim()
         let content = encodeURIComponent(this.input_content.trim())
         let theme = '无主题'
         let img = 'null'
         let type = 'markdown'
-        if (title.length === 0 || description.length === 0 || content.length === 0) {
+        if (title.length === 0 || description.length === 0 || content.length === 0 || id.length === 0) {
           // 参数不完整
           MessageBox.alert('标题、文章描述、文章主体均不能为空', '警告', {
             type: 'warning',
             confirmButtonText: '确定'
           })
         } else {
-          let url = API.INDEX
-          axios.post(url, {
+          let url = API.ARTICLE+id
+          axios.put(url, {
             title,
             description,
             content,
@@ -103,7 +140,7 @@
                 type: 'success',
                 position: 'bottom-left'
               })
-              this.$router.push(`/articles/${result.data.article_id}`)
+              this.$router.push(`/articles/${id}`)
             } else {
               MessageBox.alert(result.message, '错误', {
                 type: 'error',

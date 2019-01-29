@@ -43,23 +43,65 @@
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import API from '../api'
+  import axios from '../http'
+  import moment from 'moment'
   export default {
     name: "Home",
-    components: {},
-    computed: {
-      ...mapState(['index_data', 'loading','err_message','full_load'])
-    },
-    methods: {
-      ...mapActions(['request_index', 'initialization_time']),
-      load_article() {
-        this.request_index()
+    data() {
+      return {
+        time: null,
+        page: 0,
+        index_data: [],
+        loading: false,
+        err_message: null,
+        full_load: false
       }
+    },
+    computed: {},
+    methods: {
+      load_article() {
+        let url = `${API.INDEX}?time=${this.time}&page=${this.page}`
+        // 加载中
+        this.loading = true
+        axios.get(url).then(res => {
+          let result = res.data
+          if (result.code === 0) {
+            // 请求成功
+            // 没有新的文章
+            if (result.data.length === 0) {
+              this.full_load = true
+            }
+            let data = result.data.map(item => ({
+              article_address: '/articles/'+item._id,
+              _id: item._id,
+              title: item.title,
+              description: item.description,
+              img: item.img,
+              create_at: moment(item.create_at).format('YYYY-MM-DD HH:mm:ss'),
+              update_at: moment(item.update_at).format('YYYY-MM-DD HH:mm:ss'),
+              user: item.user,
+              user_id: item.user_id
+            }))
+            this.loading = false
+            for (let item of data) {
+              this.index_data.push(item)
+            }
+            this.page++
+          } else {
+            // 请求失败
+            this.loading = false
+            this.err_message = result.message
+          }
+        })
+      },
+
     },
     mounted() {
       // 初始化时间戳
-      this.initialization_time()
-      this.request_index()
+      this.time = new Date().getTime()
+      this.page = 0
+      this.load_article()
     }
   }
 </script>

@@ -1,15 +1,12 @@
 /**
  * vuex 的actions模块
  * */
-import axios from './../http'
+import axios from '../http'
 import moment from 'moment'
 import marked from 'marked'
-import API from './api'
+import API from '../api'
 import {MessageBox, Notification} from 'element-ui'
 import {
-  UPDATE_INDEX,
-  REQUESTING,
-  INITIALIZATION_TIME,
   UPDATE_ARTICLE,
   UPDATE_ARTICLE_ERROR,
   INITIALIZATION_ARTICLE_STATUS,
@@ -20,41 +17,6 @@ import {
 } from './types'
 
 const actions = {
-  // 初始化时间戳
-  initialization_time ({commit}) {
-    commit(INITIALIZATION_TIME)
-  },
-
-  // 请求首页数据
-  request_index ({commit, state}) {
-    let time = state.time
-    let page = state.page
-    let url = API.INDEX+`?time=${time}&page=${page}`
-    // 更新状态：请求中
-    commit(REQUESTING)
-    axios.get(url).then(res => {
-      if (res.data.code === 0) {
-        // 没有新的文章
-        if (res.data.data.length === 0) {
-          state.full_load = true
-        }
-        // 格式化数据
-        let data = res.data.data.map(item => ({
-          article_address: '/articles/'+item._id,
-          _id: item._id,
-          title: item.title,
-          description: item.description,
-          img: item.img,
-          create_at: moment(item.create_at).format('YYYY-MM-DD HH:mm:ss'),
-          update_at: moment(item.update_at).format('YYYY-MM-DD HH:mm:ss'),
-          user: item.user,
-          user_id: item.user_id
-        }))
-        commit(UPDATE_INDEX, {data})
-      }
-    })
-  },
-
   // 请求文章数据
   request_article ({commit}, article_id) {
     // 初始化文章状态
@@ -123,9 +85,10 @@ const actions = {
       if (result.code === 0) {
         // 获取信息成功
         commit(GET_USER_PUBLIC_SUCCESS, {
+          id: result.data.id,
+          type: result.data.type,
           username: result.data.username,
-          avatar: result.data.avatar,
-          type: result.data.type
+          avatar: result.data.avatar
         })
       } else {
         // 获取信息失败 - token失效
