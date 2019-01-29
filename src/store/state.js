@@ -2,13 +2,6 @@
  * vuex 的state模块
  */
 const state = {
-  // 文章相关
-  articles: {
-    request_error: false,
-    error_message: null,
-    article_status: null,
-    article_data: null,
-  },
   // 用户状态相关
   user_status: {
     // 用户id

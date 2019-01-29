@@ -2,47 +2,15 @@
  * vuex 的actions模块
  * */
 import axios from '../http'
-import moment from 'moment'
-import marked from 'marked'
 import API from '../api'
 import {MessageBox, Notification} from 'element-ui'
 import {
-  UPDATE_ARTICLE,
-  UPDATE_ARTICLE_ERROR,
-  INITIALIZATION_ARTICLE_STATUS,
-  UPDATE_ARTICLE_STATUS,
   USER_SIGN_IN_SUCCESS,
   GET_USER_PUBLIC_SUCCESS,
   SIGN_OUT
 } from './types'
 
 const actions = {
-  // 请求文章数据
-  request_article ({commit}, article_id) {
-    // 初始化文章状态
-    commit(INITIALIZATION_ARTICLE_STATUS)
-    let url = API.ARTICLE+article_id
-    axios.get(url).then(res => {
-      let result = res.data
-      if (result.code === 0) {
-        // 请求成功
-        commit(UPDATE_ARTICLE_STATUS, {message: 'ready'})
-        let data = result.data
-        data.create_at = moment(data.create_at).format('YYYY-MM-DD HH:mm:ss')
-        data.update_at = moment(data.update_at).format('YYYY-MM-DD HH:mm:ss')
-        data.content = decodeURIComponent(data.content)
-        if (data.type === 'markdown' && res.data.code === 0) {
-          // 文章格式为markdown
-          data.content = marked(data.content)
-        }
-        // 数据准备完成，触发mutation
-        commit(UPDATE_ARTICLE, {data})
-      } else {
-        commit(UPDATE_ARTICLE_ERROR, {message: `文章不存在或已删除 ${result.message}`})
-      }
-    })
-  },
-
   /* 用户登录相关 */
   // 初始化登录状态
   initialization_user_statue({commit}) {

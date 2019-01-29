@@ -35,7 +35,7 @@ export default new Router({
           component: AdminArticles
         },
         {
-          path: '/articles/:article_id',
+          path: '/articles/:id',
           component: Article
         },
         {

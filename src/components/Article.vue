@@ -1,42 +1,71 @@
 <template>
   <div>
-    <div v-cloak class="content">
-      <div v-if="this.articles.article_status === 'ready'">
-
-        <h1 class="article-title">{{articles.article_data.title}}</h1>
-        <div class="article-message">
-          <span class="author el-icon-edit">&nbsp;{{articles.article_data.user}}</span>
-          <span class="release-time el-icon-date">&nbsp;{{articles.article_data.create_at}}</span>
-        </div>
-
-        <div
-          class="article-content markdown-body"
-          v-html="this.articles.article_data.content">
-        </div>
-
-        <div class="comment-content">评论区-施工中</div>
-
+    <div v-cloak class="content" v-if="this.article.status === 'ready'">
+      <h1 class="article-title">{{article.data.title}}</h1>
+      <div class="article-message">
+        <span class="author el-icon-edit">&nbsp;{{article.data.user}}</span>
+        <span class="release-time el-icon-date">&nbsp;{{article.data.create_at}}</span>
       </div>
-      <div class="error-message" v-else>{{articles.error_message}}</div>
+      <div
+        class="article-content markdown-body"
+        v-html="this.article.data.content">
+      </div>
+      <div class="comment-content">评论区-施工中</div>
     </div>
   </div>
 </template>
 
 <script>
-  import {mapState, mapActions} from 'vuex'
+  import API from '../api'
+  import axios from '../http'
+  import moment from 'moment'
+  import marked from 'marked'
+  import {MessageBox} from 'element-ui'
   export default {
     name: "Article",
-    computed: {
-      ...mapState(['articles']),
-      article_id() {
-        return this.$route.params.article_id
+    data() {
+      return {
+        article: {
+          status: null,
+          data: null
+        }
       }
     },
+    computed: {},
     methods: {
-      ...mapActions(['request_article']),
+      load_article() {
+        let id = this.$route.params['id']
+        let url = API.ARTICLE+id
+        this.article.status = 'loading'
+        axios.get(url).then(res => {
+          let result = res.data
+          if (result.code === 0) {
+            // 请求成功
+            // 格式化参数
+            let data = result.data
+            data.create_at = moment(data.create_at).format('YYYY-MM-DD HH:mm:ss')
+            data.update_at = moment(data.update_at).format('YYYY-MM-DD HH:mm:ss')
+            data.content = decodeURIComponent(data.content)
+            if (data.type === 'markdown') {
+              data.content = marked(data.content)
+            }
+            this.article.status = 'ready'
+            this.article.data = data
+          } else {
+            this.article.status = 'error'
+            // 请求失败
+            MessageBox.alert('文章不存在或已删除', '警告', {
+              type: 'warning',
+              confirmButtonText: '确定'
+            }).then(() => {
+              window.history.back()
+            })
+          }
+        })
+      }
     },
     mounted() {
-      this.request_article(this.article_id)
+      this.load_article()
     }
   }
 </script>

@@ -2,39 +2,12 @@
  * vuex 的mutations模块
  */
 import {
-
-  UPDATE_ARTICLE,
-  UPDATE_ARTICLE_ERROR,
-  INITIALIZATION_ARTICLE_STATUS,
-  UPDATE_ARTICLE_STATUS,
   USER_SIGN_IN_SUCCESS,
   GET_USER_PUBLIC_SUCCESS,
   SIGN_OUT
 } from './types'
 
 const mutations = {
-  /* 文章相关 */
-  // 更新文章数据
-  [UPDATE_ARTICLE] (state, {data}) {
-    state.articles.article_data = data
-  },
-  // 更新文章请求状态
-  [UPDATE_ARTICLE_STATUS] (state, {message}) {
-    state.articles.article_status = message
-  },
-  // 文章请求失败
-  [UPDATE_ARTICLE_ERROR] (state, {message}) {
-    state.articles.request_error = true
-    state.articles.error_message = message
-  },
-  // 初始化文章状态
-  [INITIALIZATION_ARTICLE_STATUS] (state) {
-    state.articles.request_error = false
-    state.articles.error_message = null
-    state.articles.article_status = null
-    state.articles.article_data = null
-  },
-
   /* 用户登录相关 */
   // 登录成功
   [USER_SIGN_IN_SUCCESS] (state, {token}) {
