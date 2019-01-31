@@ -175,6 +175,9 @@
     width: 100%;
     height: 3rem;
     background-color: #ffffff;
+    border-bottom: solid;
+    border-color: #bbffaa;
+    border-width: 1px;
   }
   /* 统一设置button */
   .top-content button {

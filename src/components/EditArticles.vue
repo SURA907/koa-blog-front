@@ -185,6 +185,7 @@
         font-size: 18px;
         line-height: 1.4rem;
         background-color: #ffffff;
+        resize: none;
       }
       .operating-article {
         height: 2rem;

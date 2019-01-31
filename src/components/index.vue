@@ -19,6 +19,6 @@
 
 <style scoped>
   .index-view {
-    padding: 3rem 0 1rem 0;
+    padding: 3.4rem 0 1rem 0;
   }
 </style>

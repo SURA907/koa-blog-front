@@ -10,7 +10,7 @@
         class="article-content markdown-body"
         v-html="this.article.data.content">
       </div>
-      <div class="comment-content">评论区-施工中</div>
+      <Comment class="comment-content"></Comment>
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@
   import moment from 'moment'
   import marked from 'marked'
   import {MessageBox} from 'element-ui'
+  import Comment from '../views/Comment'
   export default {
     name: "Article",
     data() {
@@ -30,6 +31,9 @@
           data: null
         }
       }
+    },
+    components : {
+      Comment
     },
     computed: {},
     methods: {
@@ -111,9 +115,8 @@
 
     .comment-content {
       width: 80%;
-      margin: 1.2rem auto;
-      text-align: center;
-      font-size: 1.2rem;
+      margin: 1.3rem auto;
+      padding: 2rem 3rem;
     }
   }
 </style>

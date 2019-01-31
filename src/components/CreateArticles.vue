@@ -86,6 +86,7 @@
             confirmButtonText: '确定'
           })
         } else {
+          // 发起请求
           let url = API.INDEX
           axios.post(url, {
             title,
@@ -103,7 +104,7 @@
                 type: 'success',
                 position: 'bottom-left'
               })
-              this.$router.push(`/articles/${result.data.article_id}`)
+              this.$router.push(`/articles/${result.data._id}`)
             } else {
               MessageBox.alert(result.message, '错误', {
                 type: 'error',
@@ -148,6 +149,7 @@
         font-size: 18px;
         line-height: 1.4rem;
         background-color: #ffffff;
+        resize: none;
       }
       .operating-article {
         height: 2rem;
