@@ -6,7 +6,9 @@
       </div>
 
       <div class="logo-side-content">
-        <div class="side-items">7日热门</div>
+        <router-link
+          to="/chatroom"
+          class="side-items">聊天室</router-link>
         <div class="side-items">建站日志</div>
         <div class="side-items">联系SURA</div>
       </div>
@@ -139,6 +141,7 @@
   .home-content .top-content .side-items {
     width: 14vw;
     padding: 2vw 0;
+    text-decoration: none;
     color: #f4f4f4;
     text-align: center;
     border-radius: 0 8px 8px 0;

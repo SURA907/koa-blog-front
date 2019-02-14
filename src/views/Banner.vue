@@ -12,32 +12,33 @@
         <img src="./../assets/logo.png" class="logo" title="">
       </router-link>
 
+      <div></div>
       <!-- 搜索框 pc窗口-->
-      <el-input
-        class="search-input hidden-xs-only"
-        size="small"
-        placeholder="搜索"
-        prefix-icon="el-icon-search"
-        v-model="search_data"
-        @keydown.enter.native="submit_search">
-      </el-input>
+      <!--<el-input-->
+        <!--class="search-input hidden-xs-only"-->
+        <!--size="small"-->
+        <!--placeholder="搜索"-->
+        <!--prefix-icon="el-icon-search"-->
+        <!--v-model="search_data"-->
+        <!--@keydown.enter.native="submit_search">-->
+      <!--</el-input>-->
       <!-- 搜索框 小屏设备 -->
-      <div
-        class="search-content-xs hidden-sm-and-up">
-        <i
-          @click="change_xs_search_status"
-          class="el-icon-search">
-        </i>
+      <!--<div-->
+        <!--class="search-content-xs hidden-sm-and-up">-->
+        <!--<i-->
+          <!--@click="change_xs_search_status"-->
+          <!--class="el-icon-search">-->
+        <!--</i>-->
 
-        <el-input
-          class="search-input-xs"
-          :class="{'search-input-xs-open': xs_search_input_show}"
-          size="small"
-          placeholder="搜索"
-          v-model="search_data"
-          @keydown.enter.native="submit_search_xs">
-        </el-input>
-      </div>
+        <!--<el-input-->
+          <!--class="search-input-xs"-->
+          <!--:class="{'search-input-xs-open': xs_search_input_show}"-->
+          <!--size="small"-->
+          <!--placeholder="搜索"-->
+          <!--v-model="search_data"-->
+          <!--@keydown.enter.native="submit_search_xs">-->
+        <!--</el-input>-->
+      <!--</div>-->
 
       <!-- 用户状态 -->
       <UserStatus class="user-status"/>
@@ -150,9 +151,9 @@
         }
       },
       // 提交搜索-小屏设备
-      submit_search_xs() {
-        alert('功能施工中')
-      }
+      // submit_search_xs() {
+      //   alert('功能施工中')
+      // }
     }
   }
 </script>
@@ -170,7 +171,7 @@
   .top-content {
     position: fixed;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
     width: 100%;
     height: 3rem;
@@ -200,6 +201,7 @@
   /* 顶部logo */
   .top-content .btn-logo {
     margin-left: 1%;
+    flex-grow: 1;
   }
   .top-content .btn-logo .logo {
     vertical-align: top;
@@ -207,31 +209,31 @@
     height: 1.8rem;
   }
   /* 搜索栏 pc正常窗口 */
-  .top-content .search-input {
-    flex-grow: 1;
-    width: 30%;
-    margin-left: 10%;
-    margin-right: 20%;
-    user-select: text;
-  }
+  /*.top-content .search-input {*/
+    /*flex-grow: 1;*/
+    /*width: 30%;*/
+    /*margin-left: 10%;*/
+    /*margin-right: 20%;*/
+    /*user-select: text;*/
+  /*}*/
   /* 搜索栏 手机端窗口 */
-  .top-content .search-content-xs {
-    cursor: pointer;
-    position: relative;
-  }
-  .top-content .search-input-xs {
-    position: absolute;
-    width: 90vw;
-    height: 0;
-    overflow: hidden;
-    top: 2rem;
-    left: -59vw;
-    transition: height 0.3s;
-    user-select: text;
-  }
-  .top-content .search-input-xs-open {
-    height: 32px;
-  }
+  /*.top-content .search-content-xs {*/
+    /*cursor: pointer;*/
+    /*position: relative;*/
+  /*}*/
+  /*.top-content .search-input-xs {*/
+    /*position: absolute;*/
+    /*width: 90vw;*/
+    /*height: 0;*/
+    /*overflow: hidden;*/
+    /*top: 2rem;*/
+    /*left: -59vw;*/
+    /*transition: height 0.3s;*/
+    /*user-select: text;*/
+  /*}*/
+  /*.top-content .search-input-xs-open {*/
+    /*height: 32px;*/
+  /*}*/
   .top-content .user-status {
     height: 1.4rem;
     line-height: 1.4rem;

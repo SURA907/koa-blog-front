@@ -10,11 +10,14 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-plugin-component": "^1.1.1",
+    "compression-webpack-plugin": "^2.0.0",
     "element-ui": "^2.4.11",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
     "marked": "^0.5.2",
     "moment": "^2.22.2",
+    "socket.io-client": "^2.2.0",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1"

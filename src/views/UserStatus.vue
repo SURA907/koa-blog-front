@@ -10,8 +10,7 @@
       </router-link>
     </span>
     <span
-      @mouseover="user_status_over"
-      @mouseleave="user_status_leave"
+      @click="user_status_over"
       class="user-message" v-else>
       <span class="username">hi,&nbsp;{{user_status.username}}</span>
       <i class="el-icon-caret-bottom"></i>
@@ -56,9 +55,8 @@
       sign_out() {
         this.user_status_hover = false
         this.user_sign_out()
-
         let route = this.$route.path
-        let route_reg = /(^\/home$|^\/articles\/[^/]{24}$)/
+        let route_reg = /(^\/chatroom$|^\/home$|^\/articles\/[^/]{24}$)/
         if (route_reg.test(route) !== true) {
           this.$router.push({
             path: '/home'

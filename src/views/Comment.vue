@@ -66,7 +66,7 @@
     computed: {
       ...mapState(['user_status']),
       comment_length() {
-        return this.input_data_comment_content.length
+        return this.input_data_comment_content.trim().length
       }
     },
     methods: {
@@ -169,6 +169,8 @@
               MessageBox.alert(result.message, '错误', {
                 type: 'error',
                 confirmButtonText: '确定'
+              }).then(() => {
+                window.reload()
               })
             }
           })
