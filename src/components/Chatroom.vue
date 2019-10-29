@@ -41,8 +41,9 @@
   import moment from 'moment'
   import {mapState} from 'vuex'
   import {MessageBox} from 'element-ui'
+  import API from '../../api'
 
-  const socket = io('http://localhost:3000')
+  const socket = io(`${API.BASE_URL}:3000`)
   export default {
     name: "Chatroom",
     data() {
