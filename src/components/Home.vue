@@ -45,7 +45,7 @@
 </template>
 
 <script>
-  import API from '../api'
+  import API from '../../api'
   import axios from '../http'
   import moment from 'moment'
   export default {

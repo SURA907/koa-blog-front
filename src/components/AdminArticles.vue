@@ -38,7 +38,7 @@
   import {mapState} from 'vuex'
   import {MessageBox, Notification} from 'element-ui'
   import axios from '../http'
-  import API from '../api'
+  import API from '../../api'
   import moment from 'moment'
   export default {
     name: "AdminArticles",

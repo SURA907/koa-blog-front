@@ -1,7 +1,7 @@
 import axios from 'axios'
 import state from './store/state'
 import {MessageBox} from "element-ui";
-import API from './api'
+import API from '../api'
 
 /* axios 默认超时设置 */
 axios.defaults.timeout = 5000

@@ -54,7 +54,7 @@
   import {MessageBox, Notification} from 'element-ui'
   import moment from 'moment'
   import axios from '../http'
-  import API from '../api'
+  import API from '../../api'
   export default {
     name: "Comment",
     data() {

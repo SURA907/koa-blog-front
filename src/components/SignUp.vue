@@ -87,7 +87,7 @@
 <script>
   import {MessageBox} from 'element-ui'
   import axios from './../http'
-  import API from '../api'
+  import API from '../../api'
   export default {
     name: "SignUp",
     data() {

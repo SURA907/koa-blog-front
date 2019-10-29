@@ -39,7 +39,7 @@
   import marked from 'marked'
   import {mapState} from 'vuex'
   import {MessageBox, Notification} from 'element-ui'
-  import API from '../api'
+  import API from '../../api'
   import axios from '../http'
   export default {
     name: "CreateArticles",

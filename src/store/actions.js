@@ -2,7 +2,7 @@
  * vuex 的actions模块
  * */
 import axios from '../http'
-import API from '../api'
+import API from '../../api'
 import {MessageBox, Notification} from 'element-ui'
 import {
   USER_SIGN_IN_SUCCESS,
