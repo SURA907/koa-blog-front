@@ -6,9 +6,7 @@
       </div>
 
       <div class="logo-side-content">
-        <router-link
-          to="/chatroom"
-          class="side-items">聊天室</router-link>
+        <div class="side-items">聊天室</div>
         <div class="side-items">建站日志</div>
         <div class="side-items">联系SURA</div>
       </div>

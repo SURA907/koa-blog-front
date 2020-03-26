@@ -16,7 +16,6 @@
     "less-loader": "^4.1.0",
     "marked": "^0.6.2",
     "moment": "^2.22.2",
-    "socket.io-client": "^2.2.0",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.2",

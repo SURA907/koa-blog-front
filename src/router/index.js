@@ -8,7 +8,6 @@ import SignUp from '../components/SignUp'
 import AdminArticles from '../components/AdminArticles'
 import CreateArticles from '../components/CreateArticles'
 import EditArticles from '../components/EditArticles'
-import Chatroom from '../components/Chatroom'
 
 Vue.use(Router)
 
@@ -25,10 +24,6 @@ export default new Router({
         {
           path: '/home',
           component: Home
-        },
-        {
-          path: '/chatroom',
-          component: Chatroom
         },
         {
           path: '/articles/new',
