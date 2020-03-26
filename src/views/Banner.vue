@@ -178,7 +178,8 @@
     background-color: #ffffff;
     border-bottom: solid;
     border-color: #bbffaa;
-    border-width: 1px;
+    border-width: 2px;
+    z-index: 4;
   }
   /* 统一设置button */
   .top-content button {
