@@ -3,9 +3,9 @@
     <div class="top-content">
 
       <!-- 侧边导航栏按钮 -->
-      <button class="btn-guide" @click="change_guide_status">
+      <!-- <button class="btn-guide" @click="change_guide_status">
         <img class="guide-ico" src="./../assets/guide-ico.png">
-      </button>
+      </button> -->
 
       <!-- 站点logo -->
       <router-link to="/home" class="btn-logo">
