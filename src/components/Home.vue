@@ -14,7 +14,7 @@
 
     <!-- 文章展示-pc端 -->
     <div class="article-list-content" v-for="(item, index) in index_data" :key="index">
-      <img class="img-content" src="https://api.ixiaowai.cn/mcapi/mcapi.php" alt="random image">
+      <img class="img-content hidden-xs-only" src="https://api.ixiaowai.cn/mcapi/mcapi.php" alt="random image">
       <div class="article-list-items">
         <router-link
           class="article-title"
@@ -153,6 +153,7 @@
     /*min-height: 200vh;*/
     padding: 2rem 0 0 0;
     user-select: text;
+    border-bottom: 1px solid #888888;
   }
   .home-content .article-list-content .article-list-items {
     display: flex;
