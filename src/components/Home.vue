@@ -14,7 +14,7 @@
 
     <!-- 文章展示-pc端 -->
     <div class="article-list-content" v-for="(item, index) in index_data" :key="index">
-      <img class="img-content hidden-xs-only" src="https://api.ixiaowai.cn/mcapi/mcapi.php" alt="random image">
+      <img class="img-content hidden-xs-only" :src="random_image_url()" alt="random image">
       <div class="article-list-items">
         <router-link
           class="article-title"
@@ -55,11 +55,17 @@
         index_data: [],
         loading: false,
         err_message: null,
-        full_load: false
+        full_load: false,
+        img_count: 0
       }
     },
     computed: {},
     methods: {
+      random_image_url() {
+        this.img_count += 1
+        return `https://api.ixiaowai.cn/mcapi/mcapi.php?t=${this.img_count}`
+      },
+
       load_article() {
         let url = `${API.INDEX}?time=${this.time}&page=${this.page}`
         // 加载中
